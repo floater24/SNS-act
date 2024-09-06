@@ -16,16 +16,27 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={user ? <Home /> : <Register />} />
-        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+        {/* ユーザーがログインしていない場合はRegisterページ */}
+        <Route path="/" element={<Register />} />
+        
+        {/* ユーザーがログインしている場合はHomeにリダイレクト */}
         <Route
-          path="/register"
-          element={user ? <Navigate to="/" /> : <Register />}
+          path="/login"
+          element={user ? <Navigate to="/" /> : <Login />}
         />
+
+        {/* プロフィールページへのルート */}
         <Route path="/profile/:username" element={<Profile />} />
+
+        {/* ログインしていない場合、他のページへのアクセスを制限 */}
+        <Route
+          path="/home"
+          element={user ? <Home /> : <Navigate to="/login" />}
+        />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
