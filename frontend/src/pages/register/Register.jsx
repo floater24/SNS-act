@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import axios from "axios";
 import "./Register.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Register() {
   const email = useRef();
   const password = useRef();
@@ -24,7 +24,7 @@ export default function Register() {
           password: password.current.value,
         };
         //registerAPIを叩く
-        await axios.post("/auth/register", user);
+        await axios.post("/", user);
         navigate("/login");
       } catch (err) {
         console.log(err);
@@ -74,7 +74,9 @@ export default function Register() {
             <button className="loginButton" type="submit">
               サインアップ
             </button>
-            <button className="loginRegisterButton">ログイン</button>
+            <Link to="/login">
+              <button className="loginRegisterButton">ログインはこちら</button>
+            </Link>
           </form>
         </div>
       </div>

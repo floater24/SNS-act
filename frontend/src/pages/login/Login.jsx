@@ -3,6 +3,8 @@ import "./Login.css";
 import { loginCall } from "../../apiCalls";
 //AuthContextはユーザー状態が入ってる(user, isFetching, error, dispatch)
 import { AuthContext } from "../../state/AuthContext";
+import { Link } from "react-router-dom";
+
 
 export default function Login() {
   const email = useRef();
@@ -13,9 +15,7 @@ export default function Login() {
     e.preventDefault();
     // console.log(email.current.value);
     loginCall(
-      { email: email.current.value, password: password.current.value,
-        
-       },
+      { email: email.current.value, password: password.current.value },
       dispatch
     );
   };
@@ -25,11 +25,11 @@ export default function Login() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">Real SNS</h3>
-          <span className="loginDesc">本格的なSNSを、自分の手で。</span>
+          <h3 className="loginLogo">act</h3>
+          <span className="loginDesc">あなたはactする。</span>
         </div>
         <div className="loginRight">
-          <form className="loginBox" onSubmit={(e) => handleSubmit(e)}>
+          <form className="loginBox" onSubmit={(e) => handleClick(e)}>
             <p className="loginMsg">ログインはこちら</p>
             <input
               type="email"
@@ -48,7 +48,9 @@ export default function Login() {
             />
             <button className="loginButton">ログイン</button>
             <span className="loginForgot">パスワードを忘れた方へ</span>
-            <button className="loginRegisterButton">アカウント作成</button>
+            <Link to="/register">
+              <button className="loginRegisterButton">アカウント作成はこちら</button>
+            </Link>
           </form>
         </div>
       </div>
